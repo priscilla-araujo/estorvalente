@@ -35,6 +35,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.menu-open {
+  overflow: hidden;
+}
+
+body.menu-open .hero-content {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.menu-open .floating-whatsapp {
+  opacity: 0;
+  pointer-events: none;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -125,6 +139,13 @@ svg {
   background: linear-gradient(180deg, rgba(30, 44, 56, 0.42) 0%, rgba(22, 34, 44, 0.3) 100%);
 }
 
+.header-shell.menu-open {
+  background: linear-gradient(180deg, rgba(37, 50, 64, 0.94) 0%, rgba(22, 34, 44, 0.9) 100%);
+  box-shadow:
+    0 22px 56px rgba(7, 12, 20, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
 .header-highlight {
   pointer-events: none;
   position: absolute;
@@ -193,12 +214,14 @@ svg {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease, opacity 0.5s ease, padding-top 0.5s ease;
+  visibility: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding-top 0.5s ease, visibility 0.5s ease;
 }
 
 .mobile-nav.is-open {
-  max-height: 360px;
+  max-height: 420px;
   opacity: 1;
+  visibility: visible;
   padding-top: 0.75rem;
 }
 
@@ -232,6 +255,7 @@ svg {
   align-items: center;
   min-height: 640px;
   padding-bottom: 4rem;
+  transition: opacity 0.25s ease;
 }
 
 .hero-copy {
@@ -363,12 +387,17 @@ svg {
   fill: none;
 }
 
-.icon-button svg:first-child {
+.icon-button--facebook svg {
   fill: currentColor;
   stroke: none;
 }
 
-.header-actions .icon-button:first-child svg {
+.icon-button--phone svg {
+  fill: currentColor;
+  stroke: none;
+}
+
+.header-actions .icon-button--facebook svg {
   width: 1.7rem;
   height: 1.7rem;
 }
@@ -513,6 +542,39 @@ svg {
   height: 44px;
 }
 
+.mobile-actions .icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.mobile-actions .icon-button svg {
+  width: 1.82rem;
+  height: 1.82rem;
+}
+
+.mobile-actions .icon-button--facebook svg,
+.mobile-actions .icon-button--phone svg {
+  width: 1.82rem;
+  height: 1.82rem;
+}
+
+.icon-button--phone svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.mobile-actions .icon-button--phone svg {
+  width: 1.48rem;
+  height: 1.48rem;
+  transform: none;
+}
+
+.mobile-actions .icon-button--phone {
+  margin-top: 0;
+}
+
 .header-actions .icon-button:first-child {
   margin-right: 12px;
 }
@@ -548,6 +610,7 @@ svg {
 .mobile-nav-inner {
   border-top: 1px solid rgba(255, 255, 255, 0.14);
   padding-top: 1rem;
+  padding-bottom: 0.25rem;
 }
 
 .mobile-nav a {
@@ -563,8 +626,8 @@ svg {
 
 .mobile-actions {
   display: flex;
-  gap: 0.75rem;
-  padding-top: 0.5rem;
+  gap: 10px;
+  padding-top: 0.85rem;
 }
 
 .section-about,
@@ -925,7 +988,7 @@ svg {
   background: var(--primary);
   color: #ffffff;
   box-shadow: 0 10px 24px rgba(0, 161, 230, 0.22);
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease, opacity 0.2s ease;
 }
 
 .floating-whatsapp:hover {

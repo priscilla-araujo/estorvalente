@@ -42,17 +42,22 @@
   window.addEventListener("scroll", onScroll, { passive: true });
 
   if (menuToggle && mobileNav) {
-    menuToggle.addEventListener("click", () => {
-      const isOpen = mobileNav.classList.toggle("is-open");
+    const syncMenuState = (isOpen) => {
+      mobileNav.classList.toggle("is-open", isOpen);
       menuToggle.classList.toggle("is-open", isOpen);
       menuToggle.setAttribute("aria-expanded", String(isOpen));
+      headerShell?.classList.toggle("menu-open", isOpen);
+      body.classList.toggle("menu-open", isOpen);
+    };
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = !mobileNav.classList.contains("is-open");
+      syncMenuState(isOpen);
     });
 
     mobileLinks.forEach((link) => {
       link.addEventListener("click", () => {
-        mobileNav.classList.remove("is-open");
-        menuToggle.classList.remove("is-open");
-        menuToggle.setAttribute("aria-expanded", "false");
+        syncMenuState(false);
       });
     });
   }
